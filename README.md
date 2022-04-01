@@ -1,32 +1,20 @@
 # An R project for numerical solution of the Kiefer-Weiss problem
 
-A piece of R code to provide a numerical solution to the Kiefer-Weiss problem.
-
 The Kiefer-Weiss problem consists in finding a sequential hypothesis tests minimizing the maximum average sample size 
 among all the tests whose error probabilities of the first and second kind do not exceed some prescribed levels.
 
-A detailed discussion of the problem and the description of the algorithms is provided in
+This repository contains accompanying R program code for two articles:
+
 [*Novikov, A., Novikov, A., Farkhshatov, F. A computational approach to  the Kiefer-Weiss problem for sampling from 
-a Bernoulli population, 2021, arxiv.org preprint arXiv:2110.04802 [stat.ME].*](https://arxiv.org/abs/2110.04802)
+a Bernoulli population, 2021, arXiv.org preprint arXiv:2110.04802 [stat.ME]*](https://arxiv.org/abs/2110.04802)
 
-At the time being, only sampling from a Bernoulli population is covered here.
+and
 
-## Content description
-* The file [core_bernoulli.R](core_bernoulli.R) contains all functions used for calculation. List of functions can be seen below. 
-* The file [usage.R](usage.R) is a usage example of these functions.
-* The file [results.csv](results.csv) contains numerical results of these scripts. 
-You can try to use `lambda0, lambda1, th0, th1` variables as input in [usage.R](usage.R) script to verify the data in [results.csv](results.csv).
-* The directory [graphs](graphs) contains interactive versions of graphs which were prepared using the 3D visualization [rgl package](https://github.com/dmurdoch/rgl). 
-To see these plots you have to download html file and run on your browser.
+[*Design and performance evaluation in Kiefer-Weiss problems when sampling from discrete 
+exponential families, 2022, arXiv.org preprint arXiv:2203.13957 [stat.ME]*](https://arxiv.org/abs/2203.13957)
 
 
-## [core_bernoulli.R](core_bernoulli.R) functions list
+The accompanying code for the first one, covering sampling from a Bernoulli population is placed in [bernoulli](bernoulli) directory. 
 
-* **modified_kw**: calculates the optimal  test for the modified Kiefer-Weiss problem
-* **original_kw**: calculates  the optimal test for the original Kiefer-Weiss problem
-* **operating_characteristic**: calculates the operating characteristic function for a test
-* **average_sample_number**: calculates the average sample number of a test
-* **prob_not_to_stop_before**: calculates the probability that a test does not stop before a given time k
-* **sample_number_quantile**: calculates the quantile  of the distribution of the sample number
-* **monte_carlo_simulation**: calculates, by Monte Carlo simulation, the operating characteristic, the average sample number, 
-and  the standard deviation of the  sample number of a test
+The accompanying code for the second paper, covering sampling from binomial, Poisson and negative binomial (Pascal)
+distributions is placed in [discrete](discrete) directory.
