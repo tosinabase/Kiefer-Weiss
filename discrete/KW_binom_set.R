@@ -1,11 +1,13 @@
-# set of distribution-specific functions for the binomial distribution 
+# set of distribution-specific functions for the binomial distribution
+
 source("KW_common.R")
+
 size = 1 # parameter of the binomial distribution, the default is size=1 (Bernoulli)
 
 
 Hbound <- function(l0, l1, th0, th1, th) {
-
   #for binom distribution
+
   floor(
     (log(l1)/log(th1/th * (1 - th)/(1 - th1)) - log(l0)/log(th0/th * (1 - th)/(1 - th0))) /
     (log((1 - th0)/(1 - th))/log(th0/th * (1 - th)/(1 - th0)) -

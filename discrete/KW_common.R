@@ -1,4 +1,4 @@
-#  common.R contains common functions for any Kiefer-Weiss problem
+#  KW_common.R contains common functions for any Kiefer-Weiss problem
 #  model-specific functions are placed in a separate module, like KW_pois_set.R, KW_binom_set.R, etc.
 
 
@@ -138,10 +138,6 @@ Lagr <- function(test, l0, l1, th0, th1, th) {
 }
 
 
-# TODO: test it!
-# Должна давать приближенно то же что и точные вычисления
-# Если вдруг нет, надо понять в чем дело
-# под сомнением только случай size>1 (для биномиального и отрицательно биномиального)
 monte_carlo_simulation <- function(test, hyp, nMC=10000) {
   # optimal test simulation
   # hyp = true parameter value
@@ -373,33 +369,6 @@ modified_kw <- function(l0, l1, th0, th1, th, H=0) {
 }
 
 
-prob_not_to_stop_before <- function(test, th1, k) {
-  # probability to stop at  k or thereafter of a test, given theta = th1
-
-  H = length(test)
-  stepdata = test[[H]]
-  H = H - 1
-  if(k > H + 1)
-    return(0)
-  if(k > 1) {
-    repeat {
-      for(i in seq(test[[H]]$from,length.out=test[[H]]$length)) {
-        if(H + 1 == k)
-          test[[H]]$val[i - test[[H]]$from + 1] = back_step_int_asn(stepdata, H + 1, i, th1) + 1
-        else
-          test[[H]]$val[i - test[[H]]$from + 1] = back_step_int_asn(stepdata, H + 1, i, th1)
-      }
-      stepdata = test[[H]]
-      if(H == 1)break
-      H = H - 1
-    }
-    return(back_step_int_asn(stepdata, 1, 0, th1))
-  }
-  else
-    return(1)
-}
-
-
 prob_to_stop_after <- function(test, th, k) {
   #probability to stop after step  k for a test, given theta = th
 
@@ -446,21 +415,20 @@ sample_number_quantile <- function(test, th, q) {
 
 original_kw <- function(lam0, lam1, th0, th1, H=0, tol=.Machine$double.eps^0.25) {
   # minimizing  maximum average_sample_number cycle
-  # H only used when option != 1
+
+  option = ifelse(H == 0, 1, 2)
 
   delta <- function(x) {
 
-    if(option==1)
-      H=Hbound(lam0, lam1, th0, th1, x)
+    if(option == 1)
+      H = Hbound(lam0, lam1, th0, th1, x)
 
-    test = modified_kw(lam0, lam1, th0, th1, x,H=H)
+    test = modified_kw(lam0, lam1, th0, th1, x, H=H)
     ASNold = average_sample_number(test, x)
     a = optimize(average_sample_number, c(th0, th1), maximum=TRUE, test=test, tol=tol)
 
     return(a$objective - ASNold)
   }
-  if(H==0)
-    option=1
 
   res = optimize(delta, c(th0, th1), maximum=FALSE, tol=tol)
 

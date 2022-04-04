@@ -10,7 +10,7 @@ a Bernoulli population, 2021, arXiv.org preprint arXiv:2110.04802 [stat.ME]*](ht
 
 and
 
-[*Design and performance evaluation in Kiefer-Weiss problems when sampling from discrete 
+[*Novikov, A. and Farkhshatov, F. Design and performance evaluation in Kiefer-Weiss problems when sampling from discrete 
 exponential families, 2022, arXiv.org preprint arXiv:2203.13957 [stat.ME]*](https://arxiv.org/abs/2203.13957)
 
 

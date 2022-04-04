@@ -6,17 +6,28 @@ negative binomial (Pascal) distributions are covered.
 
 
 A detailed discussion of the problem and the description of the algorithms is provided in
-[*Design and performance evaluation in Kiefer-Weiss problems when sampling from discrete 
+[*Novikov, A. and Farkhshatov, F. Design and performance evaluation in Kiefer-Weiss problems when sampling from discrete 
 exponential families, 2022, arXiv.org preprint arXiv:2203.13957 [stat.ME]*](https://arxiv.org/abs/2203.13957)
 
 
 ## Content description
 * The file [KW_common.R](KW_common.R) contains all the functions providing the common user interface for the Kiefer-Weiss 
-and related problems. 
-* List of functions can be seen below. 
+and related problems. List of functions can be seen below. 
+* The distribution-specific functions are placed in:
+
+    * [KW_binom_set.R](KW_binom_set.R)  for the binomial distribution with success probability theta. 
+  The number of trials is a global variable **size** (default value 1). 
+
+    * [KW_pois_set.R](KW_pois_set.R) for the Poisson distribution with mean value theta.
+
+    * [KW_nbinom_set](KW_nbinom_set) for the negative binomial (Pascal) distribution with mean **size***theta, 
+  where **size** is a global 
+variable with default value equal to 1 (which corresponds to the geometric distribution with mean theta).
+
+* The file [usage.R](usage.R) is a usage example of these functions.
 
 
-## (KW_common.R) functions list
+## [KW_common.R](KW_common.R) functions list
 
 **modified_kw** calculates the optimal test  for the modified Kiefer-Weiss problem
 
@@ -43,14 +54,7 @@ critical constant, the randomization constant and the error probability of the s
 of the first and second kind (see Subsection 3.5 in [https://arxiv.org/abs/2203.13957](https://arxiv.org/abs/2203.13957) 
 for details).
 
-The distribution-specific functions are placed in:
 
-[KW_binom_set.R](KW_binom_set.R)  for the binomial distribution with success probability theta. The number of trials is a global variable **size** (default value 1). 
-
-[KW_pois_set.R](KW_pois_set.R) for the Poisson distribution with mean value theta.
-
-[KW_nbinom_set](KW_nbinom_set) for the negative binomial (Pascal) distribution with mean **size***theta, where **size** is a global 
-variable with default value equal to 1 (which corresponds to the geometric distribution with mean theta).
 
 
 

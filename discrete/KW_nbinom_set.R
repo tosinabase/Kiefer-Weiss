@@ -1,11 +1,14 @@
 # set of distribution-specific functions for negative binomial model
 #  parametrized by the mean value
+
 source("KW_common.R")
+
 size = 1  # default value of parameter of negative binomial distribution
 
 
 Hbound <- function(l0, l1, th0, th1, th) {
   #for Pascal distribution
+
   floor(
     (log(l0) * log(th1/th * (th + 1)/(th1 + 1)) + log(l1) * log(th/th0 * (th0 + 1)/(th + 1))) /
     (log((th1 + 1)/(th + 1)) * log(th/th0 * (th0 + 1)/(th + 1))
