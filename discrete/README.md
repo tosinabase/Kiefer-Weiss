@@ -7,7 +7,7 @@ negative binomial (Pascal) distributions are covered.
 
 A detailed discussion of the problem and the description of the algorithms is provided in
 [*Novikov, A. and Farkhshatov, F. Design and performance evaluation in Kiefer-Weiss problems when sampling from discrete 
-exponential families, 2022, arXiv.org preprint arXiv:2203.13957 [stat.ME]*](https://arxiv.org/abs/2203.13957)
+exponential families, 2022, arXiv.org preprint arXiv:2203.13957 [stat.ME] - To appear in Sequential Analysis, 2022*](https://arxiv.org/abs/2203.13957)
 
 
 ## Content description

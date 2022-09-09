@@ -6,12 +6,13 @@ among all the tests whose error probabilities of the first and second kind do no
 This repository contains accompanying R program code for two articles:
 
 [*Novikov, A., Novikov, A., Farkhshatov, F. A computational approach to  the Kiefer-Weiss problem for sampling from 
-a Bernoulli population, 2021, arXiv.org preprint arXiv:2110.04802 [stat.ME]*](https://arxiv.org/abs/2110.04802)
+a Bernoulli population, Sequential Analysis - Volume 41, 2022 - Issue 2, Pages 198-219*](https://www.tandfonline.com/doi/full/10.1080/07474946.2022.2070212)
+[(arXiv.org preprint)](https://arxiv.org/abs/2110.04802)
 
 and
 
 [*Novikov, A. and Farkhshatov, F. Design and performance evaluation in Kiefer-Weiss problems when sampling from discrete 
-exponential families, 2022, arXiv.org preprint arXiv:2203.13957 [stat.ME]*](https://arxiv.org/abs/2203.13957)
+exponential families, 2022, arXiv.org preprint arXiv:2203.13957 [stat.ME] - To appear in Sequential Analysis, 2022*](https://arxiv.org/abs/2203.13957)
 
 
 The accompanying code for the first one, covering sampling from a Bernoulli population is placed in [bernoulli](bernoulli) directory. 

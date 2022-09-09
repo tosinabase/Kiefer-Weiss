@@ -7,7 +7,8 @@ among all the tests whose error probabilities of the first and second kind do no
 
 A detailed discussion of the problem and the description of the algorithms is provided in
 [*Novikov, A., Novikov, A., Farkhshatov, F. A computational approach to  the Kiefer-Weiss problem for sampling from 
-a Bernoulli population, 2021, arXiv.org preprint arXiv:2110.04802 [stat.ME].*](https://arxiv.org/abs/2110.04802)
+a Bernoulli population, Sequential Analysis - Volume 41, 2022 - Issue 2, Pages 198-219*](https://www.tandfonline.com/doi/full/10.1080/07474946.2022.2070212)
+[(arXiv.org preprint)](https://arxiv.org/abs/2110.04802)
 
 At the time being, only sampling from a Bernoulli population is covered here.
 
