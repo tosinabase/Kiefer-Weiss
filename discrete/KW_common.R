@@ -2,7 +2,7 @@
 #  model-specific functions are placed in a separate module, like KW_pois_set.R, KW_binom_set.R, etc.
 
 
-back_step_int <- function(stepdata, n, s, l0, l1, th0, th1, th) {
+back_step_int <- function(stepdata, n, s, l0, l1, th0, th1) {
 
   incorp <- function(x) {
     if(!stepdata$laststep){
@@ -30,13 +30,12 @@ back_step_int <- function(stepdata, n, s, l0, l1, th0, th1, th) {
 }
 
 
-back_step_int_oc <- function(stepdata, n, s, th) {
+back_step_int_oc <- function(stepdata, s, th) {
   # backward induction step summation
   if(!stepdata$laststep) {
 
     sum = cdf(min(stepdata$from - 1 - s,stepdata$acceptAt - s), 1, th)
     for(k in seq(stepdata$from - s, length.out=stepdata$length))
-    # if(k>=0 & k+s<=stepdata$acceptAt)  sum=sum+stepdata$val[k+s-stepdata$from+1]*pmf(k,1,th)
       if(k >= 0)
         sum = sum + stepdata$val[k + s - stepdata$from + 1] * pmf(k, 1, th)
 
@@ -48,7 +47,7 @@ back_step_int_oc <- function(stepdata, n, s, th) {
 }
 
 
-back_step_int_asn <- function(stepdata, n, s, th) {
+back_step_int_asn <- function(stepdata, s, th) {
   # backward induction step summation
 
   if(!stepdata$laststep) {
@@ -74,7 +73,7 @@ back_step_int_asn <- function(stepdata, n, s, th) {
 
 step_effect <- function(stepdata, n, s, l0, l1, th0, th1, th) {
   #will continue if negative
-  back_step_int(stepdata, n + 1, s, l0, l1, th0, th1, th) +
+  back_step_int(stepdata, n + 1, s, l0, l1, th0, th1) +
     pmf(s, n, th) - min(l0 * pmf(s, n, th0), l1 * pmf(s, n, th1))
 }
 
@@ -88,14 +87,14 @@ operating_characteristic <- function(test, th) {
   repeat{
 
     for(i in seq(test[[H]]$from,length.out=test[[H]]$length)){
-      test[[H]]$val[i - test[[H]]$from + 1] = back_step_int_oc(stepdata, H + 1, i, th)
+      test[[H]]$val[i - test[[H]]$from + 1] = back_step_int_oc(stepdata, i, th)
     }
     stepdata = test[[H]]
     if(H == 1)
       break
     H = H - 1
   }
-  back_step_int_oc(stepdata, 1, 0, th)
+  back_step_int_oc(stepdata, 0, th)
 }
 
 
@@ -106,14 +105,14 @@ average_sample_number <- function(test, th) {
   H=H-1
   repeat{
     for(i in seq(test[[H]]$from,length.out=test[[H]]$length)) {
-      test[[H]]$val[i - test[[H]]$from + 1]= back_step_int_asn(stepdata, H + 1, i, th) + 1
+      test[[H]]$val[i - test[[H]]$from + 1]= back_step_int_asn(stepdata, i, th) + 1
     }
     stepdata = test[[H]]
     if(H == 1)
       break
     H = H - 1
   }
-  back_step_int_asn(stepdata, 1, 0, th) + 1
+  back_step_int_asn(stepdata, 0, th) + 1
 }
 
 
@@ -125,7 +124,7 @@ Lagr <- function(test, l0, l1, th0, th1, th) {
 
   repeat{
     for(i in seq(test[[H]]$from, length.out=test[[H]]$length)) {
-     test[[H]]$val[i - test[[H]]$from + 1]=back_step_int(stepdata, H + 1, i, l0, l1, th0, th1, th) + pmf(i, H, th)
+     test[[H]]$val[i - test[[H]]$from + 1] = back_step_int(stepdata, H + 1, i, l0, l1, th0, th1) + pmf(i, H, th)
     }
     stepdata=test[[H]]
 
@@ -134,7 +133,7 @@ Lagr <- function(test, l0, l1, th0, th1, th) {
     H = H - 1
 
   }
-  back_step_int(stepdata, 1, 0, l0, l1, th0, th1, th) + 1
+  back_step_int(stepdata, 1, 0, l0, l1, th0, th1) + 1
 }
 
 
@@ -197,7 +196,7 @@ modified_kw <- function(l0, l1, th0, th1, th, H=0) {
     new = list(H=H, from=a, length=b - a + 1, val=array(dim=b - a + 1), laststep=FALSE)
     for(i in seq(new$from,length.out=new$length)){
       new$val[i - new$from + 1] = min(
-        back_step_int(stepdata, H + 1, i, l0, l1, th0, th1, th) + pmf(i, H, th), l0 * pmf(i, H, th0),
+        back_step_int(stepdata, H + 1, i, l0, l1, th0, th1) + pmf(i, H, th), l0 * pmf(i, H, th0),
         l1 * pmf(i, H, th1)
       )
     }
@@ -382,7 +381,7 @@ prob_to_stop_after <- function(test, th, k) {
     n = k-1
     repeat {
       for(i in seq(test[[n]]$from, length.out=test[[n]]$length)) {
-        test[[n]]$val[i - test[[n]]$from + 1] = back_step_int_asn(stepdata, n + 1, i, th)
+        test[[n]]$val[i - test[[n]]$from + 1] = back_step_int_asn(stepdata, i, th)
       }
       stepdata = test[[n]]
       if(n == 1)
@@ -390,7 +389,7 @@ prob_to_stop_after <- function(test, th, k) {
       n = n - 1
     }
   }
-  return(back_step_int_asn(stepdata,1,0,th))
+  return(back_step_int_asn(stepdata, 0, th))
 }
 
 
