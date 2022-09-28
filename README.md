@@ -25,4 +25,4 @@ The accompanying code for the second paper, covering sampling from binomial, Poi
 distributions is placed in [discrete](discrete) directory.
 
 The accompanying code for the  third paper covers  sampling from a normal population with a known variance
-and is placed in [normal](normal) directory.
+and is placed in [continuous](continuous) directory.
