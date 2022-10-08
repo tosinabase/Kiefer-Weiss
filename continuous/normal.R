@@ -72,14 +72,10 @@ calc_center_bound <- function (n, th0, th1){
 }
 
 calc_left_bound <- function(n, l1, th1, th){
-  # v = log(1 / l1) / (th1 - th) + n * (th1 + th) / 2
-  # return(v)
   bound(1/l1, th, th1, n)
 }
 
 calc_right_bound <- function(n, l0, th0, th){
-  # v = log(1 / l0) / (th0 - th) + n * (th0 + th) / 2
-  # return(v)
   bound(l0, th0, th, n)
 }
 
@@ -167,7 +163,7 @@ step_n_has_continuation <- function (l0, l1, th0, th1, th, n){
 }
 
 
-modified_kw <- function(l0, l1, th0, th1, th, H=0, precision=0.005, print_output=TRUE){
+modified_kw <- function(l0, l1, th0, th1, th, H=0, precision=0.01, print_output=TRUE){
   if (th <= th0 || th >= th1){
     stop("Only case th0 < th < th1 is supported!")
   }
@@ -319,5 +315,13 @@ sample_number_quantile <- function (test, th, q, g_values=NULL){
     p = intgr_trapezoidal(g_values[[n]]$grid, g_values[[n]]$val)
     if (p <= 1 - q) return(n)
   }
+}
+
+
+calc_delta <- function (test, search_interval, asn_th, tol=.Machine$double.eps^0.25){
+
+  sup_asn = optimize(function (x) average_sample_number(test, x), search_interval, maximum=TRUE, tol=tol)
+
+  sup_asn$objective - asn_th
 }
 
