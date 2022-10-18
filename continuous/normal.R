@@ -236,16 +236,19 @@ modified_kw <- function(l0, l1, th0, th1, th, H=0, precision=0.01, print_output=
     if(n == 1)
       break
   }
-  test
+  list(
+    info=list(l0=l0, l1=l1, th0=th0, th1=th1, th=th, H=length(test), precision=precision),
+    data=test
+  )
 }
 
 calculate_g_values <- function (test, th){
 
-  H = tail(test, n=1)[[1]]$n
+  H = test[["info"]]$H
   g_values = list()
 
   # Gn calculation
-  grid = test[[1]]$grid
+  grid = test$data[[1]]$grid
   val = dnorm(grid - th)
   stepdata = list(n=1, grid=grid, val=val)
   g_values[[1]] = stepdata
@@ -253,28 +256,30 @@ calculate_g_values <- function (test, th){
   for (n in 2:(H - 1)){
     calc_new_Gn <- function (y) intgr(g_values[[n - 1]]$grid, g_values[[n - 1]]$val, y - th)
 
-    grid = test[[n]]$grid
+    grid = test$data[[n]]$grid
     val = Vectorize(calc_new_Gn, vectorize.args="y")(grid)
 
     stepdata = list(n=n, grid=grid, val=val)
     g_values[[n]] = stepdata
   }
 
-  g_values
+  list(theta=th, data=g_values)
 }
 
 operating_characteristic <- function (test, th, g_values=NULL){
-  H = tail(test, n=1)[[1]]$n
+  H = test[["info"]]$H
 
-  if (is.null(g_values)){
-    g_values = calculate_g_values(test, th)
+  if (is.null(g_values) || g_values$theta != th){
+    g_values = calculate_g_values(test, th)$data
+  } else {
+    g_values = g_values$data
   }
 
   # Operating characteristic calculation
-  oc = pnorm(test[[1]]$grid[1] - th)
+  oc = pnorm(test$data[[1]]$grid[1] - th)
   for (n in 1:(H - 1)){
-    a = test[[n + 1]]$grid[1]
-    grid = test[[n]]$grid
+    a = test$data[[n + 1]]$grid[1]
+    grid = test$data[[n]]$grid
     to_int_val = g_values[[n]]$val * pnorm(a - grid - th)
     oc = oc + intgr_trapezoidal(grid, to_int_val)
   }
@@ -283,10 +288,12 @@ operating_characteristic <- function (test, th, g_values=NULL){
 }
 
 average_sample_number <- function (test, th, g_values=NULL){
-  H = tail(test, n=1)[[1]]$n
+  H = test[["info"]]$H
 
-  if (is.null(g_values)){
-    g_values = calculate_g_values(test, th)
+  if (is.null(g_values) || g_values$theta != th){
+    g_values = calculate_g_values(test, th)$data
+  } else {
+    g_values = g_values$data
   }
 
   asn = 1
@@ -298,10 +305,12 @@ average_sample_number <- function (test, th, g_values=NULL){
 }
 
 sample_number_quantile <- function (test, th, q, g_values=NULL){
-  H = tail(test, n=1)[[1]]$n
+  H = test[["info"]]$H
 
-  if (is.null(g_values)){
-    g_values = calculate_g_values(test, th)
+  if (is.null(g_values) || g_values$theta != th){
+    g_values = calculate_g_values(test, th)$data
+  } else {
+    g_values = g_values$data
   }
 
   n = 0

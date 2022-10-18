@@ -5,6 +5,7 @@ source("normal.R")
 
 
 modified_kw_summary <- function(test, l0, l1, th0, th1, th, to_calc_delta=FALSE) {
+  H = test[["info"]]$H
   g_values = calculate_g_values(test, th)
   g_values0 = calculate_g_values(test, th0)
   g_values1 = calculate_g_values(test, th1)
@@ -15,13 +16,14 @@ modified_kw_summary <- function(test, l0, l1, th0, th1, th, to_calc_delta=FALSE)
     "theta0" = th0,
     "theta1" = th1,
     "theta" = th,
-    "maxNumber" = length(test),
+    "H" = H,
     "alpha" = 1 - operating_characteristic(test, th0, g_values0),
     "beta" = operating_characteristic(test, th1, g_values1),
     "ASN" = average_sample_number(test, th, g_values),
     "ASN0" = average_sample_number(test, th0, g_values0),
     "ASN1" = average_sample_number(test, th1, g_values1),
-    "Quantile" = sample_number_quantile(test, th, 0.99, g_values)
+    "quantile" = sample_number_quantile(test, th, 0.99, g_values),
+    "acceptance_constant" = test$data[[H]]$const
   )
 
   if (to_calc_delta)

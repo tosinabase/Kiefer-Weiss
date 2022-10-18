@@ -29,15 +29,19 @@ Takes arguments `l0, l1, th0, th1, th, H=0, precision=0.01, print_output=TRUE`.
 
 * `l0, l1, th0, th1, th` are input parameters of sequential test.  Currently, only the case `th0 < th < th1` is supported.
 
-* Input variable `H` is the desired maximum number of steps the test can take. It  will be reduced if step `H - 1` has no continuation. 
+* Input variable `H` is the desired maximum number of steps the test can take. It will be reduced if step `H - 1` has no continuation. 
 In this case or if `H` was set to 0, it will be redefined as the biggest number `n` such that `n - 1` 
-has continuation.  The final  adjusted `H` can be obtained  as `length(test)`.
+has continuation.  The final  adjusted `H` can be obtained  as `test[["info"]]$H`.
 
 * `precision` is the grid size for numerical integration.
 * `print_output` (boolean parameter)  Print continuation intervals at each step of test evaluation.
 
 
-Returns R list `test`. Let `H` be `length(test)`. For `n` from `1` to `H - 1` `test[[n]]` is an R list with the following fields 
+Returns an R list `test` with two fields: 
+* `info` - test parameters `l0, l1, th0, th1, th, H, precision`,
+* `data` - calculated test values.
+
+Let `H` be `test[["info"]]$H`. For `n` from `1` to `H - 1` `test$data[[n]]` is an R list with the following fields 
 * `n` - step number,
 * `grid` - grid on the continuation interval at step `n`,
 * `val`- stored values for  construction of optimal test, calculated at each point of `grid`.
@@ -47,6 +51,28 @@ For the case`n=H`
 * `const` - the acceptance constant,
 * `grid` - only one value which equals `const` field,
 * `val`- equals `NA`.
+
+Structure example of the `modified_kw` output:
+```json
+{
+  "info": {
+    "l0": 621.0, 
+    "l1": 1042.0, 
+    "th0": -0.1, 
+    "th1": 0.1, 
+    "th": -0.016, 
+    "H": 846, 
+    "precision": 0.05},
+  "data": [
+    {"n": 1, "grid": "example", "val": "example"},
+    {"n": 2, "grid": "example", "val": "example"},
+    {"n": 3, "grid": "example", "val": "example"},
+    ... 
+    {"n": 846, "const":  "example", "grid": "example", "val": "NA"}
+  ]
+  
+}
+```
 
 
 
