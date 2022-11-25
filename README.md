@@ -1,17 +1,18 @@
 # An R project for numerical solution of the Kiefer-Weiss problem
 
-The Kiefer-Weiss problem consists in finding a sequential hypothesis tests minimizing the maximum average sample size 
+The Kiefer-Weiss problem consists in finding  sequential hypothesis tests minimizing the maximum average sample size 
 among all the tests whose error probabilities of the first and second kind do not exceed some prescribed levels.
 
 This repository contains accompanying R program code for three articles:
 
 [*Novikov, A., Novikov, A., Farkhshatov, F. A computational approach to  the Kiefer-Weiss problem for sampling from 
-a Bernoulli population, Sequential Analysis - Volume 41, 2022 - Issue 2, Pages 198-219*](https://www.tandfonline.com/doi/full/10.1080/07474946.2022.2070212)
-[(arXiv.org preprint)](https://arxiv.org/abs/2110.04802)
+a Bernoulli population, Sequential Analysis - Volume 41, 2022 - Issue 2, Pages 198-219*](https://www.tandfonline.com/doi/full/10.1080/07474946.2022.2070212),
+arXiv.org preprint [*arXiv:2110.04802 [stat.ME]*](https://arxiv.org/abs/2110.04802)
 
 
 [*Novikov, A. and Farkhshatov, F. Design and performance evaluation in Kiefer-Weiss problems when sampling from discrete 
-exponential families, 2022, arXiv.org preprint arXiv:2203.13957 [stat.ME] - To appear in Sequential Analysis, 2022*](https://arxiv.org/abs/2203.13957)
+exponential families, 2022, Sequential Analysis*](https://doi.org/10.1080/07474946.2022.2109673), 
+arXiv.org preprint [*arXiv:2203.13957 [stat.ME]*](https://arxiv.org/abs/2203.13957)
 
 and
 
