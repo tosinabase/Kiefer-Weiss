@@ -117,7 +117,6 @@ average_sample_number <- function(test, th) {
 
 
 Lagr <- function(test, l0, l1, th0, th1, th) {
-  # todo: are this function used in code?
 
   H = length(test)
   stepdata = test[[H]]
