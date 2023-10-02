@@ -7,7 +7,7 @@ size = 1  # default value of parameter of negative binomial distribution
 
 
 Hbound <- function(l0, l1, th0, th1, th) {
-  #for Pascal distribution
+    # theoretical estimation of the horizon H
 
   floor(
     (log(l0) * log(th1/th * (th + 1)/(th1 + 1)) + log(l1) * log(th/th0 * (th0 + 1)/(th + 1))) /
@@ -18,6 +18,8 @@ Hbound <- function(l0, l1, th0, th1, th) {
 
 
 Lbound <- function(n, l1, th1, th) {
+  # a lower bound for  the continuation region at step n
+
   max(
     ceiling((log(l1) + n * size * log((th + 1)/(th1 + 1))) / (log((th)/(th1) * (th1 + 1)/(th + 1)))),
      0
@@ -26,6 +28,8 @@ Lbound <- function(n, l1, th1, th) {
 
 
 Ubound <- function(n, l0, th0, th) {
+  # an upper bound for the continuation region at step n
+
   floor(
     (log(l0) + n * size * log((th + 1)/(th0 + 1))) / (log((th) / (th0) * (th0 + 1) / (th + 1)))
   )

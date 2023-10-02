@@ -117,6 +117,7 @@ average_sample_number <- function(test, th) {
 
 
 Lagr <- function(test, l0, l1, th0, th1, th) {
+  # todo: are this function used in code?
 
   H = length(test)
   stepdata = test[[H]]
@@ -194,9 +195,10 @@ modified_kw <- function(l0, l1, th0, th1, th, H=0) {
   #  truncation level given by H if H is not zero
   fill_in <- function(stepdata, a, b, H) {
     new = list(H=H, from=a, length=b - a + 1, val=array(dim=b - a + 1), laststep=FALSE)
-    for(i in seq(new$from,length.out=new$length)){
+    for(i in seq(new$from, length.out=new$length)){
       new$val[i - new$from + 1] = min(
-        back_step_int(stepdata, H + 1, i, l0, l1, th0, th1) + pmf(i, H, th), l0 * pmf(i, H, th0),
+        back_step_int(stepdata, H + 1, i, l0, l1, th0, th1) + pmf(i, H, th),
+        l0 * pmf(i, H, th0),
         l1 * pmf(i, H, th1)
       )
     }
@@ -213,7 +215,7 @@ modified_kw <- function(l0, l1, th0, th1, th, H=0) {
       h = h - 1
 
     test = list()
-    stepdata = list(H=h + 1,acceptAt=Ubound(h + 1, l0/l1, th0, th1), laststep=TRUE)
+    stepdata = list(H=h + 1, acceptAt=Ubound(h + 1, l0/l1, th0, th1), laststep=TRUE)
     test[[h + 1]] = stepdata
     repeat{
       nocont = TRUE
@@ -230,7 +232,7 @@ modified_kw <- function(l0, l1, th0, th1, th, H=0) {
           stop("stop after one observation")
         rm(test);
         test = list()
-        stepdata = list(H=h + 1,acceptAt=Ubound(h + 1, l0/l1, th0, th1), laststep=TRUE)
+        stepdata = list(H=h + 1, acceptAt=Ubound(h + 1, l0/l1, th0, th1), laststep=TRUE)
         test[[h + 1]] = stepdata
         next
       }

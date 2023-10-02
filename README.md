@@ -5,19 +5,25 @@ among all the tests whose error probabilities of the first and second kind do no
 
 This repository contains accompanying R program code for three articles:
 
-[*Novikov, A., Novikov, A., Farkhshatov, F. A computational approach to  the Kiefer-Weiss problem for sampling from 
-a Bernoulli population, Sequential Analysis - Volume 41, 2022 - Issue 2, Pages 198-219*](https://www.tandfonline.com/doi/full/10.1080/07474946.2022.2070212),
+[*Novikov, A., Novikov, A., Farkhshatov, F. 2022. 
+A computational approach to  the Kiefer-Weiss problem for sampling from a Bernoulli population, 
+Sequential Analysis  41 (02),  
+pages 198-219*](https://www.tandfonline.com/doi/full/10.1080/07474946.2022.2070212),
 arXiv.org preprint [*arXiv:2110.04802 [stat.ME]*](https://arxiv.org/abs/2110.04802)
 
 
-[*Novikov, A. and Farkhshatov, F. Design and performance evaluation in Kiefer-Weiss problems when sampling from discrete 
-exponential families, 2022, Sequential Analysis*](https://doi.org/10.1080/07474946.2022.2109673), 
+[*Novikov, A. and Farkhshatov, F. 2022. 
+Design and performance evaluation in Kiefer-Weiss problems when sampling from discrete exponential families, 
+Sequential Analysis 41 (04),
+pages 417 – 434*](https://doi.org/10.1080/07474946.2022.2109673), 
 arXiv.org preprint [*arXiv:2203.13957 [stat.ME]*](https://arxiv.org/abs/2203.13957)
 
 and
 
-Novikov, A., Novikov, A., Farkhshatov, F. Numerical solution of  Kiefer-Weiss problems when sampling from continuous
-exponential families, 2022, to appear
+[*Novikov, A., Novikov, A., Farkhshatov, F. 2023. 
+Numerical solution of Kiefer-Weiss problems when sampling from continuous exponential families, 
+Sequential Analysis 42 (02), 
+pages 189-209*](https://www.tandfonline.com/doi/abs/10.1080/07474946.2023.2193602)
 
 
 The accompanying code for the first one, covering sampling from a Bernoulli population is placed in [bernoulli](bernoulli) directory. 

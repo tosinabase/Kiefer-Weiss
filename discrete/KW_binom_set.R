@@ -6,7 +6,7 @@ size = 1 # parameter of the binomial distribution, the default is size=1 (Bernou
 
 
 Hbound <- function(l0, l1, th0, th1, th) {
-  #for binom distribution
+    # theoretical estimation of the horizon H
 
   floor(
     (log(l1)/log(th1/th * (1 - th)/(1 - th1)) - log(l0)/log(th0/th * (1 - th)/(1 - th0))) /
@@ -18,6 +18,7 @@ Hbound <- function(l0, l1, th0, th1, th) {
 
 
 Ubound <- function(n, l0, th0, th) {
+    # an upper bound for the continuation region at step n
 
   floor(
     (-log(l0) - n * size * log((1 - th0)/(1 - th)))/(log(th0/th * (1 - th)/(1 - th0)))
@@ -26,6 +27,7 @@ Ubound <- function(n, l0, th0, th) {
 
 
 Lbound <- function(n, l1, th1, th) {
+  # a lower bound for  the continuation region at step n
 
   max(
     0,
@@ -88,3 +90,18 @@ d <- function(n, s, x) {
   res
 }
 
+# input parameters can be set here
+l0 = 449.995105192065
+l1 = 489.748951643705
+
+th0 = 0.05
+th1 = 0.08
+th = 0.6
+
+H = 30
+test = modified_kw(l0, l1, th0, th1, th, H=H)
+print("asd")
+
+for (i in 1:H){
+  test[[i]]
+}

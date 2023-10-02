@@ -6,8 +6,10 @@ This  directory contains the R code for sampling from a normal population.
 
 A detailed discussion of the problem and the description of the algorithms 
 is provided in 
-**Novikov, A., Novikov, A., Farkhshatov, F. Numerical solution of Kiefer-Weiss problems when sampling from 
-continuous exponential families, 2022, to appear**
+[*Novikov, A., Novikov, A., Farkhshatov, F. 2023. 
+Numerical solution of Kiefer-Weiss problems when sampling from continuous exponential families, 
+Sequential Analysis 42 (02), 
+pages 189-209*](https://www.tandfonline.com/doi/abs/10.1080/07474946.2023.2193602)
 
 
 

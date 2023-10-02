@@ -3,7 +3,9 @@
 source("KW_common.R")
 
 
+
 Hbound <- function(l0, l1, th0, th1, th) {
+  # theoretical estimation of the horizon H
   floor(
     (log(l0) / (log(th) - log(th0)) + log(l1) /  (log(th1) - log(th))) /
     ((th1 - th)/(log(th1) - log(th)) - (th - th0)/(log(th) - log(th0)))
@@ -13,6 +15,7 @@ Hbound <- function(l0, l1, th0, th1, th) {
 
 Ubound <- function(n, l0, th0, th) {
   # an upper bound for the continuation region at step n
+
   floor(log(l0) / log(th / th0) + n * (th - th0) / log(th / th0))
 }
 
