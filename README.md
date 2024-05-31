@@ -33,3 +33,5 @@ distributions is placed in [discrete](discrete) directory.
 
 The accompanying code for the  third paper covers  sampling from a normal population with a known variance
 and is placed in [continuous](continuous) directory.
+
+A Python port is available at  http://github.com/matrixalex/kiefer_weiss
